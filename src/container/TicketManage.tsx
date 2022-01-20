@@ -37,23 +37,19 @@ const Home = ({ ticketData, fetchTickets }: any) => {
               <th>Ngày xuất vé</th>
               <th>Cổng check-in</th>
             </tr>
-            {ticketData.loading ? (
-              <h1>Loading...</h1>
-            ) : (
-              ticketData.tickets.map((item: any, index: any) => {
-                return (
-                  <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{item.bookingcode}</td>
-                    <td>{item.ticketId}</td>
-                    <td>{item.status}</td>
-                    <td>{item.ticketDate}</td>
-                    <td>{item.ticketReleaseDate}</td>
-                    <td>{item.checkin}</td>
-                  </tr>
-                )
-              })
-            )}
+            {ticketData.tickets.map((item: any, index: any) => {
+              return (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{item.bookingcode}</td>
+                  <td>{item.ticketId}</td>
+                  <td>{item.status}</td>
+                  <td>{item.ticketDate}</td>
+                  <td>{item.ticketReleaseDate}</td>
+                  <td>{item.checkin}</td>
+                </tr>
+              )
+            })}
           </table>
         </div>
       </div>
