@@ -1,0 +1,59 @@
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  width: 252px;
+  height: 572px;
+
+  .menu-logo {
+    width: 133px;
+    height: 100px;
+    margin-left: 33px;
+    margin-top: 17px;
+
+    img {
+      cursor: pointer;
+    }
+  }
+
+  .menu-content {
+    ul {
+      list-style-type: none;
+      li {
+        text-decoration: none;
+        width: 220px;
+        height: 56px;
+
+        .sub-menu {
+          position: absolute;
+          display: block;
+        }
+
+        a {
+          text-decoration: none;
+          color: #1e0d03;
+          font-size: 18px;
+          font-weight: 700;
+          padding: 15px 0;
+          line-height: 26px;
+          display: block;
+          font-family: 'Montserrat';
+
+          i {
+            margin-right: 15px;
+            margin-left: 27px;
+          }
+        }
+
+        .active {
+          background-color: #ffb800;
+          color: white;
+          border-radius: 8px;
+        }
+      }
+      // :hover {
+      //   background-color: #ffb800;
+      //   border-radius: 8px;
+      // }
+    }
+  }
+}

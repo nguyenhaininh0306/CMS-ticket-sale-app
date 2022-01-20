@@ -1,0 +1,43 @@
+.nav-container {
+  width: 1567px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 17px;
+  margin-right: 32px;
+
+  .search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 16px;
+    background: #ede6e6;
+    border-radius: 12px;
+
+    input {
+      border: none;
+      outline: none;
+      background: none;
+      width: 437px;
+      height: 30px;
+    }
+  }
+
+  .contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+
+    i {
+      font-size: 18px;
+      width: 18px;
+      height: 15px;
+    }
+    .image-user {
+      background: url('../../assets/images/myself.jpg') no-repeat center center;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+    }
+  }
+}
