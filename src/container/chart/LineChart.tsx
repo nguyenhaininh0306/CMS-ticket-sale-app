@@ -1,78 +1,51 @@
-import React from 'react'
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js'
-import { Line } from 'react-chartjs-2'
+import React, { FC } from 'react'
+import { Area } from '@ant-design/plots'
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-)
+const LineChart: FC = () => {
+  // const [data, setData] = useState([])
 
-export const options = {
-  maintainAspectRatio: false,
-  plugins: {
-    legend: {
-      display: false,
+  // useEffect(() => {
+  //   asyncFetch()
+  // }, [])
+
+  const dataValue = [
+    { day: 'Thứ 2', value: 140000000 },
+    { day: 'Thứ 3', value: 220000000 },
+    { day: 'Thứ 4', value: 180000000 },
+    { day: 'Thứ 5', value: 240000000 },
+    { day: 'Thứ 6', value: 251000000 },
+    { day: 'Thứ 7', value: 190000000 },
+    { day: 'CN', value: 185000000 },
+  ]
+
+  // const asyncFetch = () => {
+  //   fetch(
+  //     dataValue
+  //   )
+  //     .then((response) => response.json())
+  //     .then((json) => setData(json))
+  //     .catch((error) => {
+  //       console.log('fetch data failed', error)
+  //     })
+  // }
+  const config = {
+    data: dataValue,
+    xField: 'day',
+    yField: 'value',
+    color: '#FAA05F',
+    xAxis: {
+      range: [0, 1],
     },
-  },
-  scales: {
-    y: {
-      ticks: {
-        color: '#888888',
-        font: {
-          size: 14,
-        },
-      },
+    yAxis: {
+      range: [0, 1],
     },
-    x: {
-      grid: {
-        display: false,
-      },
-      ticks: {
-        color: '#888888',
-        font: {
-          size: 14,
-        },
-      },
+    areaStyle: {
+      fill: 'l(270) 0:#ffffff 1:#FAA05F',
     },
-  },
-}
+    smooth: true,
+  }
 
-const labels = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'CN']
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'dataset',
-      fill: true,
-      data: [
-        145000000, 175000000, 185000000, 235000000, 220000000, 160000000,
-        190000000,
-      ],
-      borderColor: '#FF8A48',
-      pointBackgroundColor: '#FF8A48',
-      tension: 0.5,
-      pointRadius: 0,
-    },
-  ],
-}
-
-const LineChart: React.FunctionComponent = () => {
-  return <Line options={options} data={data} />
+  return <Area {...config} />
 }
 
 export default LineChart

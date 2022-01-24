@@ -1,0 +1,59 @@
+.my-modal {
+  width: 636px; /* Occupy the 90% of the screen width */
+  max-width: 90vw;
+  z-index: -1;
+}
+
+.modal-header {
+  border-bottom: none !important;
+  .modal-title {
+    margin: 0 auto !important;
+  }
+}
+
+.modal-body {
+  .filter-date {
+    display: flex;
+    gap: 20px;
+
+    .currentDay {
+      .day {
+        margin-bottom: 8px;
+      }
+    }
+  }
+
+  .filter-status {
+    .status {
+      .ant-radio-group.ant-radio-group-outline {
+        display: flex;
+        gap: 20px;
+      }
+    }
+  }
+
+  .filter-checkin {
+    margin-top: 20px;
+  }
+}
+
+.modal-footer {
+  border-top: none !important;
+
+  button.btn.btn-primary {
+    margin: 0 auto;
+    background: white;
+    color: #ff993c;
+    border: 1px solid #ff993c;
+    width: 150px;
+  }
+}
+
+.title {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 26px;
+  color: #1e0d03;
+  opacity: 0.8;
+}

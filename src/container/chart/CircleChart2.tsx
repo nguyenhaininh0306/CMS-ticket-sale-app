@@ -1,33 +1,57 @@
-import React from 'react'
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
-import { Doughnut } from 'react-chartjs-2'
+import React, { useState, useEffect } from 'react'
+import ReactDOM from 'react-dom'
+import { Pie } from '@ant-design/plots'
 
-ChartJS.register(ArcElement, Tooltip, Legend)
-
-export const options = {
-  maintainAspectRatio: false,
-  plugins: {
-    legend: {
-      display: false,
-    },
-  },
-}
-
-export const data = {
-  labels: ['Vé đã sử dụng', 'Vé chưa sử dụng'],
-  datasets: [
+const CircleChart2 = () => {
+  const data = [
     {
-      label: 'Gói sự kiện',
-      data: [13568, 56024],
-      backgroundColor: ['#FF8A48', '#4F75FF'],
-      borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
-      borderWidth: 1,
+      type: 'Vé đã sử dụng',
+      value: 30026,
     },
-  ],
-}
-
-const CircleChart2: React.FunctionComponent = () => {
-  return <Doughnut data={data} options={options} />
+    {
+      type: 'Vé chưa sử dụng',
+      value: 28302,
+    },
+  ]
+  const config = {
+    appendPadding: 10,
+    data,
+    angleField: 'value',
+    colorField: 'type',
+    color: ['#4F75FF', '#FF8A48'],
+    radius: 1,
+    innerRadius: 0.6,
+    label: {
+      type: 'inner',
+      offset: '-50%',
+      autoRotate: false,
+      content: '{value}',
+      style: {
+        textAlign: 'center',
+        fontSize: 14,
+      },
+    },
+    interactions: [
+      {
+        type: 'element-selected',
+      },
+      {
+        type: 'element-active',
+      },
+    ],
+    statistic: {
+      title: true,
+      content: {
+        style: {
+          whiteSpace: 'pre-wrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+        },
+        content: '',
+      },
+    },
+  }
+  return <Pie {...config} />
 }
 
 export default CircleChart2

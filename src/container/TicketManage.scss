@@ -67,6 +67,7 @@
           text-align: center;
           border-radius: 8px;
           padding: 10px 16px;
+          cursor: pointer;
 
           i {
             margin-right: 12px;
@@ -94,6 +95,66 @@
         border-collapse: collapse;
         width: 100%;
         height: auto;
+
+        .used {
+          display: flex;
+          gap: 5px;
+          justify-content: center;
+          align-items: center;
+          padding: 8px 12px;
+          background: #eaf1f8;
+          border: 1px solid #919dba;
+          box-sizing: border-box;
+          border-radius: 4px;
+          width: 150px;
+          height: 30px;
+          margin-left: 40px;
+          margin-top: 8px;
+          color: #919dba;
+          i {
+            font-size: 10px;
+          }
+        }
+
+        .unused {
+          display: flex;
+          gap: 5px;
+          justify-content: center;
+          align-items: center;
+          padding: 8px 12px;
+          background: #def7e0;
+          border: 1px solid #03ac00;
+          box-sizing: border-box;
+          border-radius: 4px;
+          width: 150px;
+          height: 30px;
+          margin-left: 40px;
+          margin-top: 8px;
+          color: #03ac00;
+          i {
+            font-size: 10px;
+          }
+        }
+
+        .expired {
+          display: flex;
+          gap: 5px;
+          justify-content: center;
+          align-items: center;
+          padding: 8px 12px;
+          background: #f8ebe8;
+          border: 1px solid #fd5959;
+          box-sizing: border-box;
+          border-radius: 4px;
+          width: 150px;
+          height: 30px;
+          margin-left: 40px;
+          margin-top: 8px;
+          color: #fd5959;
+          i {
+            font-size: 10px;
+          }
+        }
       }
 
       td,
