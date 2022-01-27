@@ -1,33 +1,31 @@
 import React from 'react'
-import { Button, Form, Modal } from 'react-bootstrap'
+import { Button, Modal } from 'react-bootstrap'
 import { Checkbox, Radio } from 'antd'
 import 'antd/dist/antd.css'
 import Calendar from '../calendar/Calendar'
 import './FilterModal.scss'
 
-const CheckboxGroup = Checkbox.Group
-
-const plainOptions = ['Cổng 1', 'Cổng 2', 'Cổng 3', 'Cổng 4', 'Cổng 5']
-const defaultCheckedList = ['']
-
 const FilterModal = (props: any) => {
-  const [checkedList, setCheckedList] = React.useState(defaultCheckedList)
-  const [indeterminate, setIndeterminate] = React.useState(true)
   const [checkAll, setCheckAll] = React.useState(false)
   const [disable, setDisable] = React.useState(false)
 
-  const onChange = (list: any) => {
-    setCheckedList(list)
-    setIndeterminate(!!list.length && list.length < plainOptions.length)
-    setCheckAll(list.length === plainOptions.length)
-  }
+  const [status, setStatus] = React.useState('')
 
   const onCheckAllChange = (e: any) => {
-    setCheckedList(e.target.checked ? plainOptions : [])
-    setIndeterminate(false)
     setCheckAll(e.target.checked)
     setDisable(!disable)
   }
+
+  const getValue = (e: any) => {
+    setStatus(e.target.value)
+  }
+
+  const handleSubmit = () => {
+    props.statusValue(status)
+    props.onHide()
+    setDisable(false)
+  }
+
   return (
     <Modal
       {...props}
@@ -55,8 +53,8 @@ const FilterModal = (props: any) => {
         <div className='filter-status'>
           <div className='title'>Tình trạng sử dụng</div>
           <div className='status'>
-            <Radio.Group>
-              <Radio value='Tất cả'>Tất cả</Radio>
+            <Radio.Group onChange={(e) => getValue(e)}>
+              <Radio value=''>Tất cả</Radio>
               <Radio value='Đã sử dụng'>Đã sử dụng</Radio>
               <Radio value='Chưa sử dụng'>Chưa sử dụng</Radio>
               <Radio value='Hết hạn'>Hết hạn</Radio>
@@ -66,24 +64,17 @@ const FilterModal = (props: any) => {
         <div className='filter-checkin'>
           <div className='title'>Cổng Check-in</div>
           <div className='checkin'>
-            <Checkbox
-              indeterminate={indeterminate}
-              onChange={onCheckAllChange}
-              checked={checkAll}
-            >
-              Tất cả
-            </Checkbox>
-            <CheckboxGroup
-              disabled={disable}
-              options={plainOptions}
-              value={checkedList}
-              onChange={onChange}
-            />
+            <Checkbox onChange={onCheckAllChange}>Tất cả</Checkbox>
+            <Checkbox disabled={disable}>Cổng 1</Checkbox>
+            <Checkbox disabled={disable}>Cổng 2</Checkbox>
+            <Checkbox disabled={disable}>Cổng 3</Checkbox>
+            <Checkbox disabled={disable}>Cổng 4</Checkbox>
+            <Checkbox disabled={disable}>Cổng 5</Checkbox>
           </div>
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Lọc</Button>
+        <Button onClick={handleSubmit}>Lọc</Button>
       </Modal.Footer>
     </Modal>
   )

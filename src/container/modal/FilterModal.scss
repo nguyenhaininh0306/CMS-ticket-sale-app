@@ -1,7 +1,6 @@
 .my-modal {
   width: 636px; /* Occupy the 90% of the screen width */
   max-width: 90vw;
-  z-index: -1;
 }
 
 .modal-header {
@@ -34,6 +33,12 @@
 
   .filter-checkin {
     margin-top: 20px;
+
+    .checkin {
+      .ant-checkbox-wrapper + .ant-checkbox-wrapper {
+        margin-left: 0 !important;
+      }
+    }
   }
 }
 
