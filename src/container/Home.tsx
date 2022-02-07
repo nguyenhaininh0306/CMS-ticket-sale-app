@@ -1,5 +1,5 @@
 import React from 'react'
-import Calendar from './calendar/Calendar'
+import Calendar from './calendar/CalendarPicker'
 import CircleChart1 from './chart/CircleChart1'
 import CircleChart2 from './chart/CircleChart2'
 import LineChart from './chart/LineChart'

@@ -5,7 +5,7 @@ import { fetchTickets } from '../store/actions/ticketActions'
 import './CheckingTicket.scss'
 import { Radio, Input, Space } from 'antd'
 import 'antd/dist/antd.css'
-import Calendar from './calendar/Calendar'
+import Calendar from './calendar/CalendarPicker'
 
 const CheckingTicket = ({ ticketData, fetchTickets }: any) => {
   const [data, setData] = useState([])

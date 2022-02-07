@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import { Checkbox, Radio } from 'antd'
 import 'antd/dist/antd.css'
-import Calendar from '../calendar/Calendar'
+import Calendar from '../calendar/CalendarPicker'
 import './FilterModal.scss'
 
 const FilterModal = (props: any) => {

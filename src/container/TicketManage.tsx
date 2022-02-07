@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import db from '../firebase/config'
 import { fetchTickets } from '../store/actions/ticketActions'
 import FilterModal from './modal/FilterModal'
+import { Popover, Button } from 'antd'
 import './TicketManage.scss'
 
 const TicketManage = ({ ticketData, fetchTickets }: any) => {
@@ -36,6 +37,13 @@ const TicketManage = ({ ticketData, fetchTickets }: any) => {
   useEffect(() => {
     setData(ticketData.tickets)
   }, [ticketData.tickets])
+
+  const content = (
+    <div className='change-ticket'>
+      <div>Sử dụng vé</div>
+      <div>Đổi ngày sử dụng</div>
+    </div>
+  )
 
   return (
     <div className='home-container'>
@@ -96,7 +104,13 @@ const TicketManage = ({ ticketData, fetchTickets }: any) => {
                       <td>{item.checkin}</td>
                       <th>
                         {item.status === 'Chưa sử dụng' ? (
-                          <i className='fas fa-ellipsis-v'></i>
+                          <Popover
+                            content={content}
+                            trigger='click'
+                            placement='left'
+                          >
+                            <i className='fas fa-ellipsis-v'></i>
+                          </Popover>
                         ) : (
                           ''
                         )}

@@ -1,18 +1,78 @@
-.calendar {
+.site-calendar-customize-header-wrapper {
+  width: 300px;
+  border: 1px solid #f0f0f0;
+  border-radius: 2px;
+}
+
+.calendarPicker {
+  display: flex;
+  gap: 13px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #e6e0e0;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 8px 12px;
+  width: 155px;
+  height: 40px;
   margin-right: 60px;
+  cursor: pointer;
+
+  .title-month {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    color: #1e0d03;
+    opacity: 0.78;
+  }
+
+  span.anticon.anticon-calendar {
+    color: #ff993c;
+  }
 }
 
-span.ant-picker-suffix {
-  color: #ff8a48;
+.ant-popover-placement-bottomRight .ant-popover-arrow {
+  display: none;
 }
 
-.ant-calendar-picker-input.ant-input {
-  border-radius: 8px;
+.ant-popover-inner {
+  border-radius: 20px;
+
+  .site-calendar-customize-header-wrapper {
+    border: none !important;
+
+    .ant-picker-calendar .ant-picker-panel {
+      border-top: none !important;
+    }
+  }
 }
 
-.ant-picker-dropdown {
-  z-index: 9999 !important;
-  .ant-picker-panel-container {
-    border-radius: 8px !important;
+.ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner,
+.ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner,
+.ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner {
+  background: #ffba7b !important;
+  border-radius: 50%;
+}
+
+.ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
+  border-radius: 50% !important;
+}
+
+.ant-picker-panel {
+  .ant-picker-date-panel {
+    .ant-picker-body {
+      .ant-picker-content {
+        thead {
+          tr {
+            th {
+              color: #c55e00 !important;
+              font-size: 18px;
+              font-weight: 600;
+            }
+          }
+        }
+      }
+    }
   }
 }
