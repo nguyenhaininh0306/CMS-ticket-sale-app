@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import db from '../firebase/config'
-import { fetchTickets } from '../store/actions/ticketActions'
+import { fetchTickets } from '../store/actions/ticketFamilyActions'
 import './CheckingTicket.scss'
 import { Radio, Input, Space } from 'antd'
 import 'antd/dist/antd.css'

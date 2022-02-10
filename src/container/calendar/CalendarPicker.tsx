@@ -4,14 +4,19 @@ import {
   LeftOutlined,
   RightOutlined,
 } from '@ant-design/icons'
-import { Calendar, Select, Radio, Col, Row, Typography, Popover } from 'antd'
+import { Calendar, Select, Radio, Col, Row, Popover } from 'antd'
 import moment from 'moment'
 
 import 'antd/dist/antd.css'
 import './Calendar.scss'
 
 const CalendarPicker = () => {
+  const [date, setDate] = useState(moment())
+  const [value, setValue] = useState<Number>(1)
   const datePicker = moment(new Date()).format('MM, YYYY')
+
+  const startWeek = moment().startOf('week')
+  const endWeek = moment().endOf('week')
 
   moment.updateLocale('en', {
     weekdaysMin: ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'],
@@ -19,6 +24,11 @@ const CalendarPicker = () => {
 
   const onPanelChange = (value: any, mode: any) => {
     console.log(value, mode)
+  }
+
+  const changeValue = (e: any) => {
+    setValue(e.target.value)
+    console.log(value)
   }
 
   const content = (
@@ -32,8 +42,9 @@ const CalendarPicker = () => {
 
           const current = value.clone()
           const localeData = value.localeData()
-          console.log(value.clone())
-          console.log(value.localeData())
+
+          const currentMonth = value.format('M').toString()
+          const currentYear = value.format('Y').toString()
 
           const months = []
           for (let i = start; i < end; i++) {
@@ -49,7 +60,6 @@ const CalendarPicker = () => {
             )
           }
           const month = value.month()
-
           const year = value.year()
           const options = []
           for (let i = year - 10; i < year + 10; i += 1) {
@@ -67,11 +77,29 @@ const CalendarPicker = () => {
                 </Col>
 
                 <Col style={{ fontSize: '18px', fontWeight: 'bold' }}>
-                  Tháng {datePicker}
+                  Tháng {currentMonth}, {currentYear}
                 </Col>
 
                 <Col>
-                  <RightOutlined />
+                  <Select
+                    size='small'
+                    dropdownMatchSelectWidth={false}
+                    value={String(month)}
+                    showArrow={false}
+                    onChange={(selectedMonth) => {
+                      const newValue = value.clone()
+                      newValue.month(parseInt(selectedMonth, 10))
+                      onChange(newValue)
+                    }}
+                  >
+                    {monthOptions}
+                  </Select>
+                </Col>
+
+                <Col>
+                  <RightOutlined
+                    onClick={() => setDate(date.add(1, 'month'))}
+                  />
                 </Col>
               </Row>
 
@@ -86,6 +114,7 @@ const CalendarPicker = () => {
                       margin: '14px 0',
                       gap: '5px',
                     }}
+                    onChange={(e) => changeValue(e)}
                   >
                     <Radio value={1}>Theo ngày</Radio>
                     <Radio value={2}>Theo tuần</Radio>

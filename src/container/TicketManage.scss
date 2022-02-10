@@ -160,7 +160,7 @@
       td,
       th {
         text-align: left;
-        padding: 11px 40px;
+        padding: 11px 35px;
       }
 
       tr:nth-child(odd) {
@@ -176,9 +176,37 @@
 }
 
 .ant-popover-inner-content {
+  padding: 10px 16px !important;
   .change-ticket {
-    background-color: #ffd2a8;
-    border-radius: 8px;
-    padding: 8px 16px;
   }
+}
+
+span.ant-popover-arrow-content {
+  background: #ffd2a8;
+}
+
+.ant-tabs-content-holder {
+  min-width: 1525px !important;
+}
+
+.ant-tabs-ink-bar {
+  background: #ff993c !important;
+}
+
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #ff993c !important;
+}
+
+.ant-tabs-tab-btn {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.ant-tabs-top > .ant-tabs-nav::before,
+.ant-tabs-bottom > .ant-tabs-nav::before,
+.ant-tabs-top > div > .ant-tabs-nav::before,
+.ant-tabs-bottom > div > .ant-tabs-nav::before {
+  border-bottom: none !important;
 }

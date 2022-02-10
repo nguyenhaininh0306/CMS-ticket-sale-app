@@ -90,3 +90,7 @@
     width: 150px !important ;
   }
 }
+
+.ant-picker-dropdown {
+  z-index: 9999 !important;
+}
