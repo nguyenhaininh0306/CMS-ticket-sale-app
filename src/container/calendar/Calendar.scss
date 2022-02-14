@@ -37,7 +37,7 @@
 }
 
 .ant-popover-inner {
-  border-radius: 20px;
+  border-radius: 20px !important;
 
   .site-calendar-customize-header-wrapper {
     border: none !important;
@@ -78,6 +78,99 @@
           }
         }
       }
+    }
+  }
+}
+
+.Calendar {
+  height: auto;
+  width: 370px;
+  // min-height:396px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1rem;
+  &-wrap {
+    &-radioButton {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: row;
+      margin: 0 1rem;
+    }
+    &-month {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: row;
+      padding-right: 1rem;
+    }
+  }
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    font-size: 18px;
+    //   margin:0 60px 0 0;
+
+    &-item {
+      min-width: 2rem;
+      min-height: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #c55e00;
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+  &-month {
+    color: #23221f;
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  &-week {
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    //   margin:0 60px 0 0;
+
+    &-selected {
+      border: 1px solid #ffd2a8;
+      border-radius: 16px;
+      background-color: #ffd2a8;
+    }
+    &-dayselected {
+      border-radius: 16px;
+      background-color: #ffba7b;
+    }
+  }
+  &-day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 2rem;
+    min-height: 2rem;
+    border-radius: 50%;
+    font-weight: 500;
+    color: #1e0d03;
+    font-size: 18px;
+    //   margin-right: 10px;
+    &-selected {
+      background-color: #ffba7b;
+      border-radius: 50%;
+    }
+
+    &-beforestartday {
+      color: #24221f4b;
+      opacity: 1;
+    }
+    &:hover {
+      background-color: #ffba7b;
+      cursor: pointer;
     }
   }
 }

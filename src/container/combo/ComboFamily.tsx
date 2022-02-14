@@ -7,9 +7,11 @@ import db from '../../firebase/config'
 import ChangeDateUse from '../modal/ChangeDateUse'
 
 const ComboFamily = ({ ticketData, fetchTickets }: any) => {
-  const [data, setData] = useState([])
+  const [dataFamily, setDataFamily] = useState([])
   const [modalShow, setModalShow] = useState(false)
   const [isOpenModal, setIsOpenModal] = useState(false)
+
+  console.log('family: ', dataFamily)
 
   //Lọc vé theo status
   const ref = db.collection('ticket')
@@ -19,7 +21,7 @@ const ComboFamily = ({ ticketData, fetchTickets }: any) => {
       querySnapshot.forEach((doc) => {
         tickets.push(doc.data())
       })
-      setData(tickets)
+      setDataFamily(tickets)
     })
   }
 
@@ -27,14 +29,20 @@ const ComboFamily = ({ ticketData, fetchTickets }: any) => {
     if (status !== '') {
       filterStatus(status)
     } else {
-      setData(ticketData.tickets)
+      setDataFamily(ticketData.tickets)
     }
+  }
+
+  const handleChangeDateUse = (ticket: any) => {
+    setIsOpenModal(true)
   }
 
   const content = (
     <div className='change-ticket'>
       <div>Sử dụng vé</div>
-      <div onClick={() => setIsOpenModal(true)}>Đổi ngày sử dụng</div>
+      <div onClick={() => handleChangeDateUse(dataFamily)}>
+        Đổi ngày sử dụng
+      </div>
       <ChangeDateUse show={isOpenModal} onHide={() => setIsOpenModal(false)} />
     </div>
   )
@@ -44,7 +52,7 @@ const ComboFamily = ({ ticketData, fetchTickets }: any) => {
   }, [])
 
   useEffect(() => {
-    setData(ticketData.tickets)
+    setDataFamily(ticketData.tickets)
   }, [ticketData.tickets])
   return (
     <div className='body-content'>
@@ -77,8 +85,8 @@ const ComboFamily = ({ ticketData, fetchTickets }: any) => {
             <th>Cổng check-in</th>
             <th></th>
           </tr>
-          {data && data.length
-            ? data.map((item: any, index: any) => {
+          {dataFamily && dataFamily.length
+            ? dataFamily.map((item: any, index: any) => {
                 return (
                   <tr key={index} className='row-table'>
                     <td>{index + 1}</td>

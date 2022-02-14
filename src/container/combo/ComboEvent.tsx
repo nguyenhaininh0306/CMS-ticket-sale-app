@@ -6,20 +6,20 @@ import db from '../../firebase/config'
 import { fetchTicketsEvent } from '../../store/actions/ticketEventActions'
 
 const ComboEvent = ({ ticketEventData, fetchTicketsEvent }: any) => {
-  const [data, setData] = useState([])
+  const [dataEvent, setDataEvent] = useState([])
   const [modalShow, setModalShow] = useState(false)
 
-  console.log('ninh: ', ticketEventData)
+  console.log('ninh: ', dataEvent)
 
   //Lọc vé theo status
-  const ref = db.collection('ticket')
+  const ref = db.collection('ticketEvent')
   const filterStatus = (status: String) => {
     ref.where('status', '==', status).onSnapshot((querySnapshot) => {
       const tickets: any = []
       querySnapshot.forEach((doc) => {
         tickets.push(doc.data())
       })
-      setData(tickets)
+      setDataEvent(tickets)
     })
   }
 
@@ -27,7 +27,7 @@ const ComboEvent = ({ ticketEventData, fetchTicketsEvent }: any) => {
     if (status !== '') {
       filterStatus(status)
     } else {
-      setData(ticketEventData.ticketsEvent)
+      setDataEvent(ticketEventData.ticketsEvent)
     }
   }
 
@@ -43,7 +43,7 @@ const ComboEvent = ({ ticketEventData, fetchTicketsEvent }: any) => {
   }, [])
 
   useEffect(() => {
-    setData(ticketEventData.ticketsEvent)
+    setDataEvent(ticketEventData.ticketsEvent)
   }, [ticketEventData.ticketsEvent])
 
   useEffect(() => {}, [])
@@ -79,8 +79,8 @@ const ComboEvent = ({ ticketEventData, fetchTicketsEvent }: any) => {
             <th>Cổng check-in</th>
             <th></th>
           </tr>
-          {data && data.length
-            ? data.map((item: any, index: any) => {
+          {dataEvent && dataEvent.length
+            ? dataEvent.map((item: any, index: any) => {
                 return (
                   <tr key={index} className='row-table'>
                     <td>{index + 1}</td>

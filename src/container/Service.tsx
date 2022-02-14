@@ -2,12 +2,20 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { fetchTicketCombo } from '../store/actions/ticketComboActions'
 import AddTicket from './modal/AddTicket'
+import UpdateTicket from './modal/UpdateTicket'
 import './Service.scss'
 
 const Service = ({ ticketCombo, fetchTicketCombo }: any) => {
   const [data, setData] = useState([])
   const [modalShow, setModalShow] = useState(false)
+  const [modalShowUpdate, setModalShowUpdate] = useState(false)
+  const [ticket, setTicket] = useState({})
 
+  const handleGetTicket = (ticket: {}) => {
+    setTicket(ticket)
+    setModalShowUpdate(true)
+  }
+  console.log(ticket)
   useEffect(() => {
     fetchTicketCombo()
   }, [])
@@ -75,7 +83,14 @@ const Service = ({ ticketCombo, fetchTicketCombo }: any) => {
                       <td>
                         <div className='edit-container'>
                           <i className='fas fa-edit'></i>
-                          <span>Cập nhật</span>
+                          <span onClick={() => handleGetTicket(item)}>
+                            Cập nhật
+                          </span>
+                          <UpdateTicket
+                            show={modalShowUpdate}
+                            onHideUpdate={() => setModalShowUpdate(false)}
+                            currentTicket={ticket}
+                          />
                         </div>
                       </td>
                     </tr>

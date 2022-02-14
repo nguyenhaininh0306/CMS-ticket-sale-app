@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Tabs } from 'antd'
 import './TicketManage.scss'
 import ComboFamily from './combo/ComboFamily'

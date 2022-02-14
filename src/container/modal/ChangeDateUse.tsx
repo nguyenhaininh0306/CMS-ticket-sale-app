@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import 'antd/dist/antd.css'
 import './ChangeDateUse.scss'
+import CalendarPicker from '../calendar/CalendarPicker'
 
 const ChangeDateUse = (props: any) => {
   const handleSubmit = () => {
@@ -23,18 +24,36 @@ const ChangeDateUse = (props: any) => {
       </Modal.Header>
       <Modal.Body>
         <div className='content'>
-          <div className='ticket-id'>
-            Số vé <span>PK456789123</span>
-          </div>
-          <div className='type'>
-            Loại <span>Vé cổng - Gói gia đình</span>
-          </div>
-          <div className='name'>
-            Tên sự kiện <span>Hội chợ triển lãm tiêu dùng</span>
-          </div>
-          <div className='HSD'>
-            Hạn sử dụng <span>123</span>
-          </div>
+          <table>
+            <tbody>
+              <tr>
+                <td>Số vé</td>
+                <td>
+                  <span>PK123456789</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Loại</td>
+                <td>
+                  <span>Vé cổng - Gói sự kiện</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Tên sự kiện</td>
+                <td>
+                  <span>Hội chợ triển lãm tiêu dùng 2022</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Hạn sử dụng</td>
+                <td>
+                  <span>
+                    <CalendarPicker />
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </Modal.Body>
       <Modal.Footer>

@@ -10,4 +10,23 @@
       }
     }
   }
+
+  .modal-body {
+    .content {
+      width: 100%;
+
+      table {
+        width: 100%;
+        tbody {
+          tr {
+            margin-bottom: 17px;
+            td {
+              span {
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
