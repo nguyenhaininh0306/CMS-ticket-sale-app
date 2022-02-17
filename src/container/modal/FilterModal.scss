@@ -11,6 +11,7 @@
 }
 
 .modal-body {
+  padding: 0 1rem;
   .filter-date {
     display: flex;
     gap: 20px;
@@ -23,7 +24,9 @@
   }
 
   .filter-status {
+    margin-top: 20px;
     .status {
+      margin-top: 9px;
       .ant-radio-group.ant-radio-group-outline {
         display: flex;
         gap: 20px;

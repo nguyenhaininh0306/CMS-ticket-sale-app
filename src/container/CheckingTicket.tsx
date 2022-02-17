@@ -36,12 +36,13 @@ const CheckingTicket = ({ ticketData, fetchTickets }: any) => {
 
   const onChangeStatus = (e: any) => {
     setControl(e.target.value)
+    filterControl(e.target.value)
   }
 
-  const handleFilter = () => {
-    filterControl(control)
-    // console.log(control)
-  }
+  // const handleFilter = () => {
+  //   filterControl(control)
+  //   // console.log(control)
+  // }
 
   return (
     <div className='container-content'>
@@ -136,9 +137,9 @@ const CheckingTicket = ({ ticketData, fetchTickets }: any) => {
           </div>
         </div>
 
-        <div className='button' onClick={handleFilter}>
+        {/* <div className='button' onClick={handleFilter}>
           Lọc
-        </div>
+        </div> */}
       </div>
     </div>
   )

@@ -15,7 +15,7 @@ const Service = ({ ticketCombo, fetchTicketCombo }: any) => {
     setTicket(ticket)
     setModalShowUpdate(true)
   }
-  console.log(ticket)
+
   useEffect(() => {
     fetchTicketCombo()
   }, [])
@@ -67,7 +67,7 @@ const Service = ({ ticketCombo, fetchTicketCombo }: any) => {
                       <td>{item.price} VNĐ</td>
                       <td>
                         {item.priceCombo && item.priceCombo !== 0
-                          ? item.priceCombo
+                          ? `${item.priceCombo} VNĐ/${item.ticketNumber} vé`
                           : ''}
                       </td>
                       <td

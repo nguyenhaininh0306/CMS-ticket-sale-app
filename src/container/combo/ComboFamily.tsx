@@ -34,6 +34,8 @@ const ComboFamily = ({ ticketData, fetchTickets }: any) => {
   }
 
   const handleChangeDateUse = (ticket: any) => {
+    console.log(ticket)
+
     setIsOpenModal(true)
   }
 

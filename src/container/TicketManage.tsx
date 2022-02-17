@@ -19,6 +19,7 @@ const TicketManage = () => {
             <ComboEvent />
           </Tabs.TabPane>
         </Tabs>
+        {/* <ComboFamily /> */}
       </div>
 
       <div className='foot-content'></div>

@@ -2,8 +2,8 @@ import React from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import { Checkbox, Radio } from 'antd'
 import 'antd/dist/antd.css'
-import Calendar from '../calendar/CalendarPicker'
 import './FilterModal.scss'
+import DayPicker from '../calendar/DayPicker'
 
 const FilterModal = (props: any) => {
   const [checkAll, setCheckAll] = React.useState(false)
@@ -43,11 +43,11 @@ const FilterModal = (props: any) => {
         <div className='filter-date'>
           <div className='currentDay'>
             <div className='day'>Từ ngày</div>
-            <Calendar />
+            <DayPicker />
           </div>
           <div className='currentDay'>
             <div className='day'>Đến ngày</div>
-            <Calendar />
+            <DayPicker />
           </div>
         </div>
         <div className='filter-status'>

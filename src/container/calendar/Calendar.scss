@@ -32,6 +32,25 @@
   }
 }
 
+.dayPicker {
+  display: flex;
+  gap: 13px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #e6e0e0;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 8px 12px;
+  width: 140px;
+  height: 40px;
+  margin-right: 60px;
+  cursor: pointer;
+
+  span.anticon.anticon-calendar {
+    color: #ff993c;
+  }
+}
+
 .ant-popover-placement-bottomRight .ant-popover-arrow {
   display: none;
 }
@@ -173,4 +192,8 @@
       cursor: pointer;
     }
   }
+}
+
+.ant-popover {
+  z-index: 1060 !important;
 }

@@ -9,7 +9,7 @@ import _ from 'lodash'
 const UpdateTicket = (props: any) => {
   const [disable, setDisable] = useState(true)
   const [ticket, setTicket] = useState(props.currentTicket)
-  const { Option } = Select
+  const format = moment().format('dd/mm/yyyy')
 
   const handleUpdateSubmit = () => {
     props.onHideUpdate(false)
@@ -37,8 +37,6 @@ const UpdateTicket = (props: any) => {
   //     setTicket(ticketId.bookingcode)
   //   }
   // }, [])
-
-  console.log('type date', typeof moment().format('dd/mm/yyyy'))
 
   return (
     <Modal
@@ -85,7 +83,7 @@ const UpdateTicket = (props: any) => {
           <div className='day-use'>
             <div className='title'>Ngày hết hạn</div>
             <div className='day-picker'>
-              <DatePicker placeholder='dd/mm/yy' />
+              <DatePicker />
               <TimePicker placeholder='hh:mm:ss' />
             </div>
           </div>
@@ -113,10 +111,10 @@ const UpdateTicket = (props: any) => {
         <div className='status'>
           <div className='title'>Tình trạng</div>
           <div className='select'>
-            <Select defaultValue='1' onChange={handleChange}>
-              <Option value='1'>Đang sử dụng</Option>
-              <Option value='2'>Tắt</Option>
-            </Select>
+            <select value={ticket.status}>
+              <option>Đang sử dụng</option>
+              <option>Tắt</option>
+            </select>
           </div>
         </div>
       </Modal.Body>

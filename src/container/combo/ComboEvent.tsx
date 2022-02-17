@@ -9,7 +9,7 @@ const ComboEvent = ({ ticketEventData, fetchTicketsEvent }: any) => {
   const [dataEvent, setDataEvent] = useState([])
   const [modalShow, setModalShow] = useState(false)
 
-  console.log('ninh: ', dataEvent)
+  console.log('event: ', dataEvent)
 
   //Lọc vé theo status
   const ref = db.collection('ticketEvent')

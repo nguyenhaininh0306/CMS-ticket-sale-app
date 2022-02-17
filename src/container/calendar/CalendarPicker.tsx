@@ -143,9 +143,9 @@ import {
   LeftOutlined,
   RightOutlined,
 } from '@ant-design/icons'
-import { Col, Input, Popover, Radio, Row } from 'antd'
+import { Col, Popover, Radio, Row } from 'antd'
 import moment from 'moment'
-import { FC, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   dayOfWeekStyle,
   daySelectedStyle,
@@ -159,7 +159,7 @@ import './Calendar.scss'
 
 const weekDay = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN']
 
-const CalendarPicker: FC = () => {
+const CalendarPicker = () => {
   const [calendar, setCalendar] = useState<any>([])
   const [value, setValue] = useState(moment())
   const [valueDay, setValueDay] = useState()
@@ -178,7 +178,6 @@ const CalendarPicker: FC = () => {
 
   const content = (
     <div className='Calendar'>
-      {/* <div style={{ padding: 8 }}> */}
       <Row gutter={8} style={{ fontSize: 18, fontWeight: 'bold' }}>
         <Col>
           <LeftOutlined
@@ -252,7 +251,6 @@ const CalendarPicker: FC = () => {
           </div>
         </Col>
       </Row>
-      {/* </div> */}
     </div>
   )
 
