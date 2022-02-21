@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import 'antd/dist/antd.css'
 import './ChangeDateUse.scss'
-import CalendarPicker from '../calendar/CalendarPicker'
+import DayPicker from '../calendar/DayPicker'
 
 const ChangeDateUse = (props: any) => {
   const handleSubmit = () => {
@@ -48,7 +48,7 @@ const ChangeDateUse = (props: any) => {
                 <td>Hạn sử dụng</td>
                 <td>
                   <span>
-                    <CalendarPicker />
+                    <DayPicker />
                   </span>
                 </td>
               </tr>

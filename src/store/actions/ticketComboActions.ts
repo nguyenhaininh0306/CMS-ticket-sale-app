@@ -30,7 +30,7 @@ export const fetchTicketCombo = () => {
       .then((response) => {
         const ticketCombos: any = []
         response.docs.forEach((item) => {
-          ticketCombos.push(item.data())
+          ticketCombos.push({ ...item.data(), id: item.id })
         })
         dispatch(fetchSUCCESS(ticketCombos))
       })

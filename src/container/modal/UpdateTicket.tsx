@@ -1,30 +1,82 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Modal } from 'react-bootstrap'
-import { Checkbox, TimePicker, DatePicker, Select } from 'antd'
+import {
+  Checkbox,
+  TimePicker,
+  DatePicker,
+  Select,
+  Modal,
+  Button,
+  Row,
+  Col,
+  Form,
+} from 'antd'
 import moment from 'moment'
 import 'antd/dist/antd.css'
 import './UpdateTicket.scss'
-import _ from 'lodash'
+import { connect } from 'react-redux'
+import { updateTicket } from '../../store/actions/ticketActions'
 
 const UpdateTicket = (props: any) => {
-  const [disable, setDisable] = useState(true)
+  const [disableA, setDisableA] = useState(true)
+  const [disableB, setDisableB] = useState(true)
   const [ticket, setTicket] = useState(props.currentTicket)
-  const format = moment().format('dd/mm/yyyy')
+
+  const [nameEvent, setNameEvent] = useState('')
+  const [timeUse, setTimeUse] = useState(ticket.timeUse)
+  const [timeExpired, setTimeExpired] = useState(ticket.timeExpired)
+  const [price, setPrice] = useState(ticket.price)
+  const [priceCombo, setPriceCombo] = useState(ticket.priceCombo)
+  const [status, setStatus] = useState(ticket.status)
+  const [ticketNumber, setTicketNumber] = useState(ticket.ticketNumber)
+  const { Option } = Select
 
   const handleUpdateSubmit = () => {
-    props.onHideUpdate(false)
+    const dataUpdate = {
+      id: ticket.id,
+      nameEvent: nameEvent,
+      timeUse: timeUse,
+      timeExpired: timeExpired,
+      price: price,
+      priceCombo: priceCombo,
+      status: status,
+      ticketNumber: ticketNumber,
+    }
+
+    props.updateTicketData(dataUpdate)
+    props.onHideUpdate()
   }
 
-  const handleChange = (value: String) => {
+  const handleHideModal = () => {
+    props.onHideUpdate()
+  }
+
+  function handleChange(value: String) {
+    setStatus(value)
     console.log(`selected ${value}`)
   }
 
-  const changeDisable = (e: any) => {
+  const changeDisableA = (e: any) => {
     if (e.target.checked === true) {
-      setDisable(false)
+      setDisableA(false)
     } else {
-      setDisable(true)
+      setDisableA(true)
     }
+  }
+
+  const changeDisableB = (e: any) => {
+    if (e.target.checked === true) {
+      setDisableB(false)
+    } else {
+      setDisableB(true)
+    }
+  }
+
+  const handleOnChangeDateUse = (date: any) => {
+    setTimeUse(date.toDate())
+  }
+
+  const handleOnChangeDateExpired = (date: any) => {
+    setTimeExpired(date.toDate())
   }
 
   useEffect(() => {
@@ -39,93 +91,175 @@ const UpdateTicket = (props: any) => {
   // }, [])
 
   return (
-    <Modal
-      {...props}
-      size='md'
-      aria-labelledby='contained-modal-title-vcenter'
-      dialogClassName='my-modal'
-    >
-      <Modal.Header>
-        <Modal.Title id='contained-modal-title-vcenter'>
-          <div className='title'>Cập nhật thông tin gói vé</div>
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <div className='ticket-content'>
-          <div className='event-id'>
-            <div className='title'>Mã sự kiện</div>
-            <input
-              type='text'
-              value={ticket.bookingcode ? ticket.bookingcode : ''}
-            />
-          </div>
-          {ticket.name && ticket.name === 'Gói sự kiện' ? (
-            <div className='event-name'>
-              <div className='title'>Tên sự kiện</div>
+    <>
+      <Modal
+        title='Cập nhật thông tin gói vé'
+        visible={props.show}
+        footer={null}
+        width={758}
+        centered
+      >
+        <Row className='info-ticket'>
+          <Col span={12} className='info-title'>
+            <Col span={24} className='title'>
+              Mã sự kiện<span className='warning'>*</span>
+            </Col>
+
+            <Col span={24} className='info-input'>
               <input
                 type='text'
-                value={ticket.nameEvent ? ticket.nameEvent : ''}
+                value={ticket.bookingcode ? ticket.bookingcode : ''}
+                disabled
               />
-            </div>
-          ) : (
-            ''
-          )}
-        </div>
+            </Col>
+          </Col>
 
-        <div className='day'>
-          <div className='day-use'>
-            <div className='title'>Ngày áp dụng</div>
-            <div className='day-picker'>
-              <DatePicker placeholder='dd/mm/yy' />
-              <TimePicker placeholder='hh:mm:ss' />
-            </div>
-          </div>
-          <div className='day-use'>
-            <div className='title'>Ngày hết hạn</div>
-            <div className='day-picker'>
-              <DatePicker />
-              <TimePicker placeholder='hh:mm:ss' />
-            </div>
-          </div>
-        </div>
+          <Col span={12} className='info-title'>
+            {ticket.name && ticket.name === 'Gói sự kiện' ? (
+              <>
+                <Col span={24} className='title'>
+                  Tên sự kiện
+                </Col>
+                <Col span={24} className='info-input event'>
+                  <input
+                    type='text'
+                    value={ticket.nameEvent ? ticket.nameEvent : ''}
+                    onChange={(e) => setNameEvent(e.target.value)}
+                  />
+                </Col>
+              </>
+            ) : (
+              ''
+            )}
+          </Col>
+        </Row>
 
-        <div className='price'>
-          <div className='title'>Giá vé áp dụng</div>
-          <Checkbox onChange={changeDisable}>
-            Vé lẻ (vnđ/vé) với giá{' '}
-            <input type='text' placeholder='Giá vé' disabled={disable} /> / vé
-          </Checkbox>
-          <Checkbox onChange={changeDisable}>
-            Combo vé với giá{' '}
-            <input type='text' placeholder='Giá vé' disabled={disable} /> /{' '}
-            <input
-              className='number-ticket'
-              type='text'
-              placeholder='Số vé'
-              disabled={disable}
-            />{' '}
-            vé
-          </Checkbox>
-        </div>
+        <Row className='day'>
+          <Col span={12}>
+            <Row>
+              <Col span={24} className='title'>
+                Ngày áp dụng
+              </Col>
+              <Col span={12}>
+                <DatePicker
+                  placeholder='dd/mm/yy'
+                  format='DD/MM/YYYY'
+                  onChange={(date) => handleOnChangeDateUse(date)}
+                />
+              </Col>
+              <Col span={12}>
+                <TimePicker placeholder='hh:mm:ss' />
+              </Col>
+            </Row>
+          </Col>
 
-        <div className='status'>
-          <div className='title'>Tình trạng</div>
-          <div className='select'>
-            <select value={ticket.status}>
-              <option>Đang sử dụng</option>
-              <option>Tắt</option>
-            </select>
-          </div>
-        </div>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={handleUpdateSubmit}>Hủy</Button>
-        <Button className='submit' onClick={handleUpdateSubmit}>
-          Lưu
-        </Button>
-      </Modal.Footer>
-    </Modal>
+          <Col span={12}>
+            <Row>
+              <Col span={24} className='title'>
+                Ngày hết hạn
+              </Col>
+              <Col span={12}>
+                <DatePicker
+                  placeholder='dd/mm/yy'
+                  format='DD/MM/YYYY'
+                  onChange={(date) => handleOnChangeDateExpired(date)}
+                />
+              </Col>
+              <Col span={12}>
+                <TimePicker placeholder='hh:mm:ss' />
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+
+        <Row className='ticket-price'>
+          <Col span={24} className='title'>
+            Giá vé áp dụng
+          </Col>
+
+          <Col span={24} className='one-ticket'>
+            <Checkbox onChange={changeDisableA}>
+              Vé lẻ (vnđ/vé) với giá{' '}
+              <input
+                className='one-ticket-input'
+                type='number'
+                placeholder='Giá vé'
+                disabled={disableA}
+                value={ticket.price}
+                onChange={(e) => setPrice(parseInt(e.target.value))}
+              />{' '}
+              / vé
+            </Checkbox>
+          </Col>
+
+          <Col span={24} className='combo-ticket'>
+            <Checkbox onChange={changeDisableB}>
+              Combo vé với giá{' '}
+              <input
+                className='combo-ticket-input'
+                type='number'
+                placeholder='Giá vé'
+                disabled={disableB}
+                value={ticket.priceCombo}
+                onChange={(e) => setPriceCombo(parseInt(e.target.value))}
+              />{' '}
+              /{' '}
+              <input
+                className='number-ticket'
+                type='number'
+                placeholder='Số vé'
+                disabled={disableB}
+                value={ticket.ticketNumber}
+                onChange={(e) => setTicketNumber(parseInt(e.target.value))}
+              />{' '}
+              vé
+            </Checkbox>
+          </Col>
+        </Row>
+
+        <Row className='status'>
+          <Col span={24} className='title'>
+            Tình trạng
+          </Col>
+
+          <Col span={24} className='select'>
+            <Select
+              value={status}
+              style={{ width: 176 }}
+              onChange={handleChange}
+            >
+              <Option value='Đang sử dụng'>Đang sử dụng</Option>
+              <Option value='Tắt'>Tắt</Option>
+            </Select>
+          </Col>
+
+          <Col span={24}>
+            <span className='warning'>*</span>
+            <span className='info-warning'>
+              <i>là thông tin bắt buộc</i>
+            </span>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col span={24} className='button'>
+            <Button className='cancel' onClick={handleHideModal}>
+              Hủy
+            </Button>
+            <Button className='submit' onClick={handleUpdateSubmit}>
+              Lưu
+            </Button>
+          </Col>
+        </Row>
+      </Modal>
+    </>
   )
 }
 
-export default UpdateTicket
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    updateTicketData: (data: any) => dispatch(updateTicket(data)),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(UpdateTicket)

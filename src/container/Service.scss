@@ -162,3 +162,13 @@
     }
   }
 }
+
+td.day-use {
+  display: flex;
+  flex-direction: column;
+}
+
+.ant-pagination {
+  display: flex;
+  justify-content: center;
+}

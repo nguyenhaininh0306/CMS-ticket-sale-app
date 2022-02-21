@@ -5,7 +5,7 @@ import { fetchTickets } from '../store/actions/ticketFamilyActions'
 import './CheckingTicket.scss'
 import { Radio, Input, Space } from 'antd'
 import 'antd/dist/antd.css'
-import Calendar from './calendar/CalendarPicker'
+import DayPicker from './calendar/DayPicker'
 
 const CheckingTicket = ({ ticketData, fetchTickets }: any) => {
   const [data, setData] = useState([])
@@ -129,11 +129,11 @@ const CheckingTicket = ({ ticketData, fetchTickets }: any) => {
         <div className='day-picker'>
           <div className='current'>
             <div className='day-title'>Từ ngày</div>
-            <Calendar />
+            <DayPicker />
           </div>
           <div className='current'>
             <div className='day-title'>Đến ngày</div>
-            <Calendar />
+            <DayPicker />
           </div>
         </div>
 

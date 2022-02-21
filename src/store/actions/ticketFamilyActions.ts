@@ -30,7 +30,7 @@ export const fetchTickets = () => {
       .then((response) => {
         const tickets: any = []
         response.docs.forEach((item) => {
-          tickets.push(item.data())
+          tickets.push({ ...item.data(), id: item.id })
         })
         dispatch(fetchSUCCESS(tickets))
       })

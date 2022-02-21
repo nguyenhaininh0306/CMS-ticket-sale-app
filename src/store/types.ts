@@ -1,3 +1,5 @@
 export const REQUEST = 'REQUEST'
 export const SUCCESS = 'SUCCESS'
 export const ERROR = 'ERROR'
+export const CREATE_TICKET_SUCCESS = 'CREATE_TICKET_SUCCESS'
+export const CREATE_TICKET_FAILED = 'CREATE_TICKET_FAILED'

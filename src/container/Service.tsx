@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import { fetchTicketCombo } from '../store/actions/ticketComboActions'
 import AddTicket from './modal/AddTicket'
 import UpdateTicket from './modal/UpdateTicket'
+import moment from 'moment'
 import './Service.scss'
+import { Pagination } from 'antd'
 
 const Service = ({ ticketCombo, fetchTicketCombo }: any) => {
   const [data, setData] = useState([])
@@ -19,6 +21,7 @@ const Service = ({ ticketCombo, fetchTicketCombo }: any) => {
   useEffect(() => {
     fetchTicketCombo()
   }, [])
+
   useEffect(() => {
     setData(ticketCombo.ticketCombo)
   }, [ticketCombo.ticketCombo])
@@ -58,12 +61,28 @@ const Service = ({ ticketCombo, fetchTicketCombo }: any) => {
             {data && data.length
               ? data.map((item: any, index: any) => {
                   return (
-                    <tr key={index} className='row-table'>
+                    <tr key={item.id} className='row-table'>
                       <td>{index + 1}</td>
                       <td>{item.bookingcode}</td>
                       <td>{item.name}</td>
-                      <td>{item.timeUse}</td>
-                      <td>{item.timeExpired}</td>
+                      <td className='day-use'>
+                        <div>
+                          {moment(item.timeUse.toDate()).format('DD/MM/YYYY')}
+                        </div>
+                        <div>
+                          {moment(item.timeUse.toDate()).format('hh:mm:ss')}
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          {moment(item.timeExpired.toDate()).format(
+                            'DD/MM/YYYY'
+                          )}
+                        </div>
+                        <div>
+                          {moment(item.timeExpired.toDate()).format('hh:mm:ss')}
+                        </div>
+                      </td>
                       <td>{item.price} VNĐ</td>
                       <td>
                         {item.priceCombo && item.priceCombo !== 0
@@ -98,6 +117,7 @@ const Service = ({ ticketCombo, fetchTicketCombo }: any) => {
                 })
               : ''}
           </table>
+          <Pagination defaultCurrent={1} total={50} pageSize={8} />
         </div>
       </div>
     </div>
