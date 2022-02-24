@@ -1,32 +1,75 @@
-.modal-content {
-  .modal-header {
-    .modal-title {
-      .title {
-        color: #1e0d03;
-        font-style: normal;
+.ant-modal-body {
+  .row-content {
+    margin-top: 20px;
+    .row-title-A {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 26px;
+      color: #1e0d03;
+      opacity: 0.7;
+    }
+
+    .row-title-B {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      color: #1e0d03;
+      opacity: 0.7;
+    }
+  }
+
+  .btn {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    width: 344px;
+    height: 48px;
+    margin-top: 30px;
+
+    .cancel {
+      width: 160px;
+      height: 48px;
+      padding: 11px 24px;
+      border: 1px solid #ff993c;
+      box-sizing: border-box;
+      border-radius: 8px;
+
+      span {
+        color: #ff993c !important;
         font-weight: bold;
-        font-size: 24px;
-        line-height: 30px;
+        font-size: 18px;
+        line-height: 26px;
+      }
+    }
+
+    .submit {
+      width: 160px;
+      height: 48px;
+      padding: 11px 24px;
+      background-color: #ff993c;
+      border: 1px solid #ff993c;
+      box-sizing: border-box;
+      border-radius: 8px;
+
+      span {
+        color: #ffffff !important;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 26px;
       }
     }
   }
+}
 
-  .modal-body {
-    .content {
-      width: 100%;
+.ant-picker {
+  border-radius: 8px !important;
+  width: 143px;
+  height: 40px;
+}
 
-      table {
-        width: 100%;
-        tbody {
-          tr {
-            margin-bottom: 17px;
-            td {
-              span {
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+.anticon {
+  color: #ff993c;
+  width: 20px;
 }

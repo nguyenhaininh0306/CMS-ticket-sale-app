@@ -1,29 +1,29 @@
-import { REQUEST, SUCCESS, ERROR } from '../types'
+import { EVENT_REQUEST, EVENT_SUCCESS, EVENT_ERROR } from '../types'
 import db from '../../firebase/config'
 
-export const fetchREQUEST = () => {
+export const fetchEventREQUEST = () => {
   return {
-    type: REQUEST,
+    type: EVENT_REQUEST,
   }
 }
 
-export const fetchSUCCESS = (tickets: any) => {
+export const fetchEventSUCCESS = (tickets: any) => {
   return {
-    type: SUCCESS,
+    type: EVENT_SUCCESS,
     payload: tickets,
   }
 }
 
-export const fetchERROR = (error: any) => {
+export const fetchEventERROR = (error: any) => {
   return {
-    type: ERROR,
+    type: EVENT_ERROR,
     payload: error,
   }
 }
 
 export const fetchTicketsEvent = () => {
   return async (dispatch: any) => {
-    dispatch(fetchREQUEST)
+    dispatch(fetchEventREQUEST)
     const res = await db.collection('ticketEvent')
     res
       .get()
@@ -32,10 +32,10 @@ export const fetchTicketsEvent = () => {
         response.docs.forEach((item) => {
           tickets.push({ ...item.data(), id: item.id })
         })
-        dispatch(fetchSUCCESS(tickets))
+        dispatch(fetchEventSUCCESS(tickets))
       })
       .catch((error) => {
-        dispatch(fetchERROR(error.message))
+        dispatch(fetchEventERROR(error.message))
       })
   }
 }

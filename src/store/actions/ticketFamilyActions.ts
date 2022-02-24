@@ -1,29 +1,29 @@
-import { REQUEST, SUCCESS, ERROR } from '../types'
+import { FAMILY_REQUEST, FAMILY_SUCCESS, FAMILY_ERROR } from '../types'
 import db from '../../firebase/config'
 
-export const fetchREQUEST = () => {
+export const fetchFamilyREQUEST = () => {
   return {
-    type: REQUEST,
+    type: FAMILY_REQUEST,
   }
 }
 
-export const fetchSUCCESS = (tickets: any) => {
+export const fetchFamilySUCCESS = (tickets: any) => {
   return {
-    type: SUCCESS,
+    type: FAMILY_SUCCESS,
     payload: tickets,
   }
 }
 
-export const fetchERROR = (error: any) => {
+export const fetchFamilyERROR = (error: any) => {
   return {
-    type: ERROR,
+    type: FAMILY_ERROR,
     payload: error,
   }
 }
 
 export const fetchTickets = () => {
   return async (dispatch: any) => {
-    dispatch(fetchREQUEST)
+    dispatch(fetchFamilyREQUEST)
     const res = await db.collection('ticket')
     res
       .get()
@@ -32,10 +32,10 @@ export const fetchTickets = () => {
         response.docs.forEach((item) => {
           tickets.push({ ...item.data(), id: item.id })
         })
-        dispatch(fetchSUCCESS(tickets))
+        dispatch(fetchFamilySUCCESS(tickets))
       })
       .catch((error) => {
-        dispatch(fetchERROR(error.message))
+        dispatch(fetchFamilyERROR(error.message))
       })
   }
 }

@@ -4,29 +4,31 @@ import 'antd/dist/antd.css'
 import './ChangeDateUse.scss'
 import moment from 'moment'
 import { connect } from 'react-redux'
-import { updateTicketFamily } from '../../store/actions/ticketActions'
+import { updateTicketEvent } from '../../store/actions/ticketActions'
 
-const ChangeDateUse = (props: any) => {
-  const [itemTicket, setItemTicket] = useState(props.ticketDateData)
+const ChangeDateUseEvent = (props: any) => {
+  const [itemTicketEvent, setItemTicketEvent] = useState(
+    props.ticketDateDataEvent
+  )
 
-  const [ticketDateFamily, setTicketDateFamily] = useState(
-    moment(itemTicket.ticketDate.toDate()).format('DD/MM/YYYY')
+  const [ticketDateEvent, setTicketDateEvent] = useState(
+    moment(itemTicketEvent.ticketDate.toDate()).format('DD/MM/YYYY')
   )
   const handleSubmit = () => {
-    props.updateTicketDataFamily({
-      id: itemTicket.id,
-      ticketDate: ticketDateFamily,
+    props.updateTicketDataEvent({
+      id: itemTicketEvent.id,
+      ticketDate: ticketDateEvent,
     })
     props.onHide()
   }
 
   const handleOnChangeDateUse = (date: any) => {
-    setTicketDateFamily(date.toDate())
+    setTicketDateEvent(date.toDate())
   }
 
   useEffect(() => {
-    setItemTicket(props.ticketDateData)
-  }, [props.ticketDateData])
+    setItemTicketEvent(props.ticketDateDataEvent)
+  }, [props.ticketDateDataEvent])
 
   return (
     <Modal
@@ -41,7 +43,7 @@ const ChangeDateUse = (props: any) => {
           <span>Số vé</span>
         </Col>
         <Col span={19} className='row-title-B'>
-          <span>{itemTicket.bookingcode}</span>
+          <span>{itemTicketEvent.bookingcode}</span>
         </Col>
       </Row>
 
@@ -50,22 +52,22 @@ const ChangeDateUse = (props: any) => {
           <span>Loại</span>
         </Col>
         <Col span={19} className='row-title-B'>
-          <span>{itemTicket.type} - Gói sự kiện</span>
+          <span>{itemTicketEvent.type} - Gói sự kiện</span>
         </Col>
       </Row>
-      {/* 
-      {itemTicket.event ? (
+
+      {itemTicketEvent.event ? (
         <Row className='row-content'>
           <Col span={5} className='row-title-A'>
             <span>Tên sự kiện</span>
           </Col>
           <Col span={19} className='row-title-B'>
-            <span>{itemTicket.event}</span>
+            <span>{itemTicketEvent.event}</span>
           </Col>
         </Row>
       ) : (
         ''
-      )} */}
+      )}
 
       <Row className='row-content'>
         <Col span={5} className='row-title-A'>
@@ -74,7 +76,7 @@ const ChangeDateUse = (props: any) => {
         <Col span={19}>
           <DatePicker
             format='DD/MM/YYYY'
-            placeholder={ticketDateFamily}
+            placeholder={ticketDateEvent}
             onChange={(date) => handleOnChangeDateUse(date)}
           />
         </Col>
@@ -96,8 +98,8 @@ const ChangeDateUse = (props: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    updateTicketDataFamily: (data: any) => dispatch(updateTicketFamily(data)),
+    updateTicketDataEvent: (data: any) => dispatch(updateTicketEvent(data)),
   }
 }
 
-export default connect(null, mapDispatchToProps)(ChangeDateUse)
+export default connect(null, mapDispatchToProps)(ChangeDateUseEvent)

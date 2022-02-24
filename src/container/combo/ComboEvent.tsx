@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import FilterModal from '../modal/FilterModal'
-import { Popover } from 'antd'
+import { Popover, Table } from 'antd'
 import db from '../../firebase/config'
 import { fetchTicketsEvent } from '../../store/actions/ticketEventActions'
+import moment from 'moment'
+import ChangeDateUseEvent from '../modal/ChangeDateUseEvent'
 
 const ComboEvent = ({ ticketEventData, fetchTicketsEvent }: any) => {
   const [dataEvent, setDataEvent] = useState([])
   const [modalShow, setModalShow] = useState(false)
-
-  console.log('event: ', dataEvent)
+  const [isOpenModal, setIsOpenModal] = useState(false)
+  const [ticketDateDataEvent, setTicketDateDataEvent] = useState({})
 
   //Lọc vé theo status
   const ref = db.collection('ticketEvent')
@@ -31,12 +33,29 @@ const ComboEvent = ({ ticketEventData, fetchTicketsEvent }: any) => {
     }
   }
 
+  const handleOpen = () => {
+    setIsOpenModal(true)
+  }
+
   const content = (
     <div className='change-ticket'>
       <div>Sử dụng vé</div>
-      <div>Đổi ngày sử dụng</div>
+      <div onClick={() => handleOpen()}>Đổi ngày sử dụng</div>
+      {isOpenModal && isOpenModal === true ? (
+        <ChangeDateUseEvent
+          show={isOpenModal}
+          onHide={() => setIsOpenModal(false)}
+          ticketDateDataEvent={ticketDateDataEvent}
+        />
+      ) : (
+        ''
+      )}
     </div>
   )
+
+  const handleGetDataTicket = (ticketDataEvent: any) => {
+    setTicketDateDataEvent(ticketDataEvent)
+  }
 
   useEffect(() => {
     fetchTicketsEvent()
@@ -99,8 +118,14 @@ const ComboEvent = ({ ticketEventData, fetchTicketsEvent }: any) => {
                       <i className='fas fa-circle'></i>
                       {item.status}
                     </td>
-                    <td>{item.ticketDate}</td>
-                    <td>{item.ticketReleaseDate}</td>
+                    <td>
+                      {moment(item.ticketDate.toDate()).format('DD/MM/YYYY')}
+                    </td>
+                    <td>
+                      {moment(item.ticketReleaseDate.toDate()).format(
+                        'DD/MM/YYYY'
+                      )}
+                    </td>
                     <td>{item.checkin}</td>
                     <th>
                       {item.status === 'Chưa sử dụng' ? (
@@ -113,10 +138,11 @@ const ComboEvent = ({ ticketEventData, fetchTicketsEvent }: any) => {
                             borderRadius: '8px',
                             width: '159px',
                             height: '59px',
-                            padding: '8px 16px',
                           }}
                         >
-                          <i className='fas fa-ellipsis-v'></i>
+                          <div onClick={() => handleGetDataTicket(item)}>
+                            <i className='fas fa-ellipsis-v'></i>
+                          </div>
                         </Popover>
                       ) : (
                         ''
@@ -127,6 +153,7 @@ const ComboEvent = ({ ticketEventData, fetchTicketsEvent }: any) => {
               })
             : ''}
         </table>
+        {/* <Table dataSource={dataEvent}></Table> */}
       </div>
     </div>
   )

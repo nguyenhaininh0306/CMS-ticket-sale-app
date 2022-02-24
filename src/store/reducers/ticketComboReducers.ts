@@ -1,24 +1,24 @@
-import { REQUEST, SUCCESS, ERROR } from '../types'
+import { COMBO_REQUEST, COMBO_SUCCESS, COMBO_ERROR } from '../types'
 
 const initialState = {
   ticketCombo: [],
   error: '',
-  loading: true,
+  loading: false,
 }
 
 const ticketComboReducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case REQUEST:
+    case COMBO_REQUEST:
       return {
         ...state,
       }
-    case SUCCESS:
+    case COMBO_SUCCESS:
       return {
         ...state,
         ticketCombo: action.payload,
-        loading: false,
+        loading: !state.loading,
       }
-    case ERROR:
+    case COMBO_ERROR:
       return {
         ...state,
         error: action.payload,

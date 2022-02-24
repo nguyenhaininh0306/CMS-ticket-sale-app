@@ -5,13 +5,13 @@ import FilterModal from '../modal/FilterModal'
 import { Popover, Tabs } from 'antd'
 import db from '../../firebase/config'
 import ChangeDateUse from '../modal/ChangeDateUse'
+import moment from 'moment'
 
 const ComboFamily = ({ ticketData, fetchTickets }: any) => {
   const [dataFamily, setDataFamily] = useState([])
   const [modalShow, setModalShow] = useState(false)
   const [isOpenModal, setIsOpenModal] = useState(false)
-
-  console.log('family: ', dataFamily)
+  const [ticketDateData, setTicketDateData] = useState({})
 
   //Lọc vé theo status
   const ref = db.collection('ticket')
@@ -33,21 +33,29 @@ const ComboFamily = ({ ticketData, fetchTickets }: any) => {
     }
   }
 
-  const handleChangeDateUse = (ticket: any) => {
-    console.log(ticket)
-
+  const handleOpen = () => {
     setIsOpenModal(true)
   }
 
   const content = (
     <div className='change-ticket'>
       <div>Sử dụng vé</div>
-      <div onClick={() => handleChangeDateUse(dataFamily)}>
-        Đổi ngày sử dụng
-      </div>
-      <ChangeDateUse show={isOpenModal} onHide={() => setIsOpenModal(false)} />
+      <div onClick={() => handleOpen()}>Đổi ngày sử dụng</div>
+      {isOpenModal && isOpenModal === true ? (
+        <ChangeDateUse
+          show={isOpenModal}
+          onHide={() => setIsOpenModal(false)}
+          ticketDateData={ticketDateData}
+        />
+      ) : (
+        ''
+      )}
     </div>
   )
+
+  const handleGetDataTicket = (ticketData: any) => {
+    setTicketDateData(ticketData)
+  }
 
   useEffect(() => {
     fetchTickets()
@@ -106,8 +114,14 @@ const ComboFamily = ({ ticketData, fetchTickets }: any) => {
                       <i className='fas fa-circle'></i>
                       {item.status}
                     </td>
-                    <td>{item.ticketDate}</td>
-                    <td>{item.ticketReleaseDate}</td>
+                    <td>
+                      {moment(item.ticketDate.toDate()).format('DD/MM/YYYY')}
+                    </td>
+                    <td>
+                      {moment(item.ticketReleaseDate.toDate()).format(
+                        'DD/MM/YYYY'
+                      )}
+                    </td>
                     <td>{item.checkin}</td>
                     <th>
                       {item.status === 'Chưa sử dụng' ? (
@@ -122,7 +136,9 @@ const ComboFamily = ({ ticketData, fetchTickets }: any) => {
                             height: '59px',
                           }}
                         >
-                          <i className='fas fa-ellipsis-v'></i>
+                          <div onClick={() => handleGetDataTicket(item)}>
+                            <i className='fas fa-ellipsis-v'></i>
+                          </div>
                         </Popover>
                       ) : (
                         ''

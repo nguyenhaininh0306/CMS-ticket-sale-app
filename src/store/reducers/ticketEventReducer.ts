@@ -1,4 +1,4 @@
-import { REQUEST, SUCCESS, ERROR } from '../types'
+import { EVENT_REQUEST, EVENT_SUCCESS, EVENT_ERROR } from '../types'
 
 const initialState = {
   loading: true,
@@ -8,17 +8,17 @@ const initialState = {
 
 const ticketEventReducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case REQUEST:
+    case EVENT_REQUEST:
       return {
         ...state,
       }
-    case SUCCESS:
+    case EVENT_SUCCESS:
       return {
         ...state,
         loading: false,
         ticketsEvent: action.payload,
       }
-    case ERROR:
+    case EVENT_ERROR:
       return {
         ...state,
         error: action.payload,

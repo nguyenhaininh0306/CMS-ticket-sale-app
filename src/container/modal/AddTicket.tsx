@@ -25,7 +25,7 @@ const AddTicket = (props: any) => {
   const [timeExpired, setTimeExpired] = useState(moment())
   const [price, setPrice] = useState(0)
   const [priceCombo, setPriceCombo] = useState(0)
-  const [status, setStatus] = useState('Đang sử dụng')
+  const [status, setStatus] = useState('')
   const [ticketNumber, setTicketNumber] = useState(0)
 
   const handleCreateTicket = () => {
@@ -60,6 +60,11 @@ const AddTicket = (props: any) => {
     } else {
       setDisable(true)
     }
+  }
+
+  const handleChange = (value: any) => {
+    setStatus(value)
+    console.log(`selected ${value}`)
   }
 
   const handleOnChangeDateUse = (date: any) => {
@@ -183,10 +188,7 @@ const AddTicket = (props: any) => {
         </Col>
 
         <Col span={24} className='select'>
-          <Select
-            style={{ width: 176 }}
-            onChange={(e) => setStatus(e.target.value)}
-          >
+          <Select style={{ width: 176 }} onChange={handleChange}>
             <Option value='Đang sử dụng'>Đang sử dụng</Option>
             <Option value='Tắt'>Tắt</Option>
           </Select>

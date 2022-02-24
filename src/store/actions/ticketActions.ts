@@ -6,6 +6,7 @@ import {
   doc,
   updateDoc,
 } from 'firebase/firestore'
+import { toast } from 'react-toastify'
 
 const BookingCode = 'ALT' + Number(Math.random().toPrecision(8)) * 100000000
 
@@ -32,8 +33,10 @@ export const createTicket = (data: any) => {
     if (data) {
       await addDoc(ticketCollectionRef, result)
       dispatch({ type: 'CREATE_TICKET_SUCCESS', payload: result })
+      toast.success('Add ticket success')
     } else {
       dispatch({ type: 'CREATE_TICKET_FAILED' })
+      toast.error('Add ticket failed')
     }
   }
 }
@@ -41,7 +44,7 @@ export const createTicket = (data: any) => {
 export const updateTicket = (data: any) => {
   return async (dispatch: any) => {
     const itemTicket = doc(db, 'ticketCombo', data.id)
-    console.log(data)
+    // console.log(data)
 
     const result = {
       nameEvent: data.nameEvent,
@@ -54,13 +57,50 @@ export const updateTicket = (data: any) => {
     }
 
     if (data.id) {
-      await updateDoc(itemTicket, {
-        ...result,
-        id: arrayUnion(data.id),
-      })
+      await updateDoc(itemTicket, result)
       dispatch({ type: 'UPDATE_TICKET_SUCCESS', payload: result })
+      toast.success('Update done !!!')
     } else {
       dispatch({ type: 'UPDATE_TICKET_FAILED' })
+      toast.error('Update failed !!!')
+    }
+  }
+}
+
+export const updateTicketFamily = (data: any) => {
+  return async (dispatch: any) => {
+    const itemTicketFamily = doc(db, 'ticket', data.id)
+
+    const result = {
+      ticketDate: data.ticketDate,
+    }
+
+    if (data.id) {
+      await updateDoc(itemTicketFamily, result)
+      dispatch({ type: 'UPDATE_TICKET_FAMILY_SUCCESS', payload: result })
+      toast.success('Update done !!!')
+    } else {
+      dispatch({ type: 'UPDATE_TICKET_FAMILY_FAILED' })
+      toast.error('Update failed !!!')
+    }
+  }
+}
+
+export const updateTicketEvent = (data: any) => {
+  return async (dispatch: any) => {
+    const itemTicketEvent = doc(db, 'ticketEvent', data.id)
+
+    const result = {
+      ticketDate: data.ticketDate,
+    }
+
+    if (data.id) {
+      await updateDoc(itemTicketEvent, result)
+      dispatch({ type: 'UPDATE_TICKET_EVENT_SUCCESS', payload: result })
+      toast.success('Update done !!!')
+    } else {
+      dispatch({ type: 'UPDATE_TICKET_EVENT_FAILED' })
+      toast.error('Update failed !!!')
     }
   }
 }

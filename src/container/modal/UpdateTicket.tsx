@@ -20,15 +20,19 @@ const UpdateTicket = (props: any) => {
   const [disableA, setDisableA] = useState(true)
   const [disableB, setDisableB] = useState(true)
   const [ticket, setTicket] = useState(props.currentTicket)
+  const { Option } = Select
 
-  const [nameEvent, setNameEvent] = useState('')
-  const [timeUse, setTimeUse] = useState(ticket.timeUse)
-  const [timeExpired, setTimeExpired] = useState(ticket.timeExpired)
+  const [nameEvent, setNameEvent] = useState(ticket.nameEvent)
+  const [timeUse, setTimeUse] = useState(
+    moment(ticket.timeUse.toDate()).format('DD/MM/YYYY')
+  )
+  const [timeExpired, setTimeExpired] = useState(
+    moment(ticket.timeExpired.toDate()).format('DD/MM/YYYY')
+  )
   const [price, setPrice] = useState(ticket.price)
   const [priceCombo, setPriceCombo] = useState(ticket.priceCombo)
   const [status, setStatus] = useState(ticket.status)
   const [ticketNumber, setTicketNumber] = useState(ticket.ticketNumber)
-  const { Option } = Select
 
   const handleUpdateSubmit = () => {
     const dataUpdate = {
@@ -50,7 +54,7 @@ const UpdateTicket = (props: any) => {
     props.onHideUpdate()
   }
 
-  function handleChange(value: String) {
+  const handleChange = (value: any) => {
     setStatus(value)
     console.log(`selected ${value}`)
   }
@@ -123,7 +127,7 @@ const UpdateTicket = (props: any) => {
                 <Col span={24} className='info-input event'>
                   <input
                     type='text'
-                    value={ticket.nameEvent ? ticket.nameEvent : ''}
+                    value={nameEvent ? nameEvent : ''}
                     onChange={(e) => setNameEvent(e.target.value)}
                   />
                 </Col>
@@ -142,7 +146,7 @@ const UpdateTicket = (props: any) => {
               </Col>
               <Col span={12}>
                 <DatePicker
-                  placeholder='dd/mm/yy'
+                  placeholder={timeUse}
                   format='DD/MM/YYYY'
                   onChange={(date) => handleOnChangeDateUse(date)}
                 />
@@ -160,7 +164,7 @@ const UpdateTicket = (props: any) => {
               </Col>
               <Col span={12}>
                 <DatePicker
-                  placeholder='dd/mm/yy'
+                  placeholder={timeExpired}
                   format='DD/MM/YYYY'
                   onChange={(date) => handleOnChangeDateExpired(date)}
                 />
@@ -185,7 +189,7 @@ const UpdateTicket = (props: any) => {
                 type='number'
                 placeholder='Giá vé'
                 disabled={disableA}
-                value={ticket.price}
+                value={price}
                 onChange={(e) => setPrice(parseInt(e.target.value))}
               />{' '}
               / vé
@@ -200,7 +204,7 @@ const UpdateTicket = (props: any) => {
                 type='number'
                 placeholder='Giá vé'
                 disabled={disableB}
-                value={ticket.priceCombo}
+                value={priceCombo}
                 onChange={(e) => setPriceCombo(parseInt(e.target.value))}
               />{' '}
               /{' '}
@@ -209,7 +213,7 @@ const UpdateTicket = (props: any) => {
                 type='number'
                 placeholder='Số vé'
                 disabled={disableB}
-                value={ticket.ticketNumber}
+                value={ticketNumber}
                 onChange={(e) => setTicketNumber(parseInt(e.target.value))}
               />{' '}
               vé

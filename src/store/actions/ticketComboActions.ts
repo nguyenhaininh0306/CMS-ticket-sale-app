@@ -1,29 +1,31 @@
-import { REQUEST, SUCCESS, ERROR } from '../types'
+import { COMBO_REQUEST, COMBO_SUCCESS, COMBO_ERROR } from '../types'
 import db from '../../firebase/config'
+import moment from 'moment'
 
-export const fetchREQUEST = () => {
+export const fetchComboREQUEST = () => {
   return {
-    type: REQUEST,
+    type: COMBO_REQUEST,
   }
 }
 
-export const fetchSUCCESS = (ticketCombo: any) => {
+export const fetchComboSUCCESS = (ticketCombo: any) => {
   return {
-    type: SUCCESS,
+    type: COMBO_SUCCESS,
     payload: ticketCombo,
+    loading: false,
   }
 }
 
-export const fetchERROR = (error: any) => {
+export const fetchComboERROR = (error: any) => {
   return {
-    type: ERROR,
+    type: COMBO_ERROR,
     payload: error,
   }
 }
 
 export const fetchTicketCombo = () => {
   return async (dispatch: any) => {
-    dispatch(fetchREQUEST)
+    dispatch(fetchComboREQUEST)
     const res = await db.collection('ticketCombo')
     res
       .get()
@@ -32,10 +34,10 @@ export const fetchTicketCombo = () => {
         response.docs.forEach((item) => {
           ticketCombos.push({ ...item.data(), id: item.id })
         })
-        dispatch(fetchSUCCESS(ticketCombos))
+        dispatch(fetchComboSUCCESS(ticketCombos))
       })
       .catch((err) => {
-        dispatch(fetchERROR(err.message))
+        dispatch(fetchComboERROR(err.message))
       })
   }
 }

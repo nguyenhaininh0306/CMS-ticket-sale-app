@@ -1,4 +1,4 @@
-import { REQUEST, SUCCESS, ERROR } from '../types'
+import { FAMILY_REQUEST, FAMILY_SUCCESS, FAMILY_ERROR } from '../types'
 
 const initialState = {
   loading: true,
@@ -8,17 +8,17 @@ const initialState = {
 
 const ticketReducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case REQUEST:
+    case FAMILY_REQUEST:
       return {
         ...state,
       }
-    case SUCCESS:
+    case FAMILY_SUCCESS:
       return {
         ...state,
         loading: false,
         tickets: action.payload,
       }
-    case ERROR:
+    case FAMILY_ERROR:
       return {
         ...state,
         error: action.payload,

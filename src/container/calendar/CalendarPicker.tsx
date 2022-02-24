@@ -213,21 +213,24 @@ const CalendarPicker = () => {
         <Col span={24}>
           <div className='Calendar-wrap'>
             <div className='Calendar-header'>
-              {weekDay.map((day: any) => (
-                <div className='Calendar-header-item'>{day}</div>
+              {weekDay.map((day: any, index: any) => (
+                <div className='Calendar-header-item' key={index}>
+                  {day}
+                </div>
               ))}
             </div>
 
-            {calendar.map((week: any) => (
+            {calendar.map((week: any, index: any) => (
               <div
                 className={`Calendar-week Calendar-week-${weekStyle(
                   valueSave,
                   week,
                   buttonRadio
                 )}`}
+                key={index}
               >
-                {week.map((day: any) => (
-                  <div onClick={() => handleDayClick(day)}>
+                {week.map((day: any, index: any) => (
+                  <div onClick={() => handleDayClick(day)} key={index}>
                     <div
                       className={`Calendar-day Calendar-day-${dayStyle(
                         value,

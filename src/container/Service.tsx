@@ -7,7 +7,7 @@ import moment from 'moment'
 import './Service.scss'
 import { Pagination } from 'antd'
 
-const Service = ({ ticketCombo, fetchTicketCombo }: any) => {
+const Service = ({ ticketCombo, loading, fetchTicketCombo }: any) => {
   const [data, setData] = useState([])
   const [modalShow, setModalShow] = useState(false)
   const [modalShowUpdate, setModalShowUpdate] = useState(false)
@@ -20,7 +20,7 @@ const Service = ({ ticketCombo, fetchTicketCombo }: any) => {
 
   useEffect(() => {
     fetchTicketCombo()
-  }, [])
+  }, [fetchTicketCombo])
 
   useEffect(() => {
     setData(ticketCombo.ticketCombo)
@@ -105,11 +105,15 @@ const Service = ({ ticketCombo, fetchTicketCombo }: any) => {
                           <span onClick={() => handleGetTicket(item)}>
                             Cập nhật
                           </span>
-                          <UpdateTicket
-                            show={modalShowUpdate}
-                            onHideUpdate={() => setModalShowUpdate(false)}
-                            currentTicket={ticket}
-                          />
+                          {modalShowUpdate === true ? (
+                            <UpdateTicket
+                              show={modalShowUpdate}
+                              onHideUpdate={() => setModalShowUpdate(false)}
+                              currentTicket={ticket}
+                            />
+                          ) : (
+                            ''
+                          )}
                         </div>
                       </td>
                     </tr>
@@ -127,6 +131,7 @@ const Service = ({ ticketCombo, fetchTicketCombo }: any) => {
 const mapStateToProps = (state: any) => {
   return {
     ticketCombo: state.ticketCombo,
+    loading: state.loading,
   }
 }
 

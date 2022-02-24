@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 import db from '../firebase/config'
 import { fetchTickets } from '../store/actions/ticketFamilyActions'
 import './CheckingTicket.scss'
-import { Radio, Input, Space } from 'antd'
+import { Radio, Space } from 'antd'
 import 'antd/dist/antd.css'
 import DayPicker from './calendar/DayPicker'
+import moment from 'moment'
 
 const CheckingTicket = ({ ticketData, fetchTickets }: any) => {
   const [data, setData] = useState([])
@@ -88,7 +89,11 @@ const CheckingTicket = ({ ticketData, fetchTickets }: any) => {
                       <tr key={index} className='row-table'>
                         <td>{index + 1}</td>
                         <td>{item.ticketId}</td>
-                        <td>{item.ticketDate}</td>
+                        <td>
+                          {moment(item.ticketDate.toDate()).format(
+                            'DD/MM/YYYY'
+                          )}
+                        </td>
                         <td>{item.type}</td>
                         <td>{item.checkin}</td>
                         <td
