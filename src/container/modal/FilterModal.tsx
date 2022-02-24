@@ -20,9 +20,9 @@ const FilterModal = (props: any) => {
     setStatus(e.target.value)
   }
 
-  const handleSubmit = () => {
+  const handleSubmitFilter = () => {
     props.statusValue(status)
-    props.onHide()
+    props.onHideFilter()
     setDisable(false)
   }
 
@@ -74,7 +74,7 @@ const FilterModal = (props: any) => {
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={handleSubmit}>Lọc</Button>
+        <Button onClick={handleSubmitFilter}>Lọc</Button>
       </Modal.Footer>
     </Modal>
   )

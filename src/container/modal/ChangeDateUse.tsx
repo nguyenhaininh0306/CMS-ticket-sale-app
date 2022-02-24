@@ -12,12 +12,12 @@ const ChangeDateUse = (props: any) => {
   const [ticketDateFamily, setTicketDateFamily] = useState(
     moment(itemTicket.ticketDate.toDate()).format('DD/MM/YYYY')
   )
-  const handleSubmit = () => {
+  const handleSubmitUpdate = () => {
     props.updateTicketDataFamily({
       id: itemTicket.id,
       ticketDate: ticketDateFamily,
     })
-    props.onHide()
+    props.onHideDateUse()
   }
 
   const handleOnChangeDateUse = (date: any) => {
@@ -82,10 +82,10 @@ const ChangeDateUse = (props: any) => {
 
       <Row>
         <Col span={24} className='btn'>
-          <Button className='cancel' onClick={() => props.onHide()}>
+          <Button className='cancel' onClick={() => props.onHideDateUse()}>
             Hủy
           </Button>
-          <Button className='submit' onClick={handleSubmit}>
+          <Button className='submit' onClick={() => handleSubmitUpdate()}>
             Lưu
           </Button>
         </Col>

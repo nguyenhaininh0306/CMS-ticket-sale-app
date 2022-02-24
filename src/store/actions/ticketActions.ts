@@ -47,7 +47,6 @@ export const updateTicket = (data: any) => {
     // console.log(data)
 
     const result = {
-      nameEvent: data.nameEvent,
       price: data.price,
       priceCombo: data.priceCombo,
       status: data.status,

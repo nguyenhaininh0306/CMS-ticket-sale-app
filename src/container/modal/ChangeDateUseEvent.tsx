@@ -14,12 +14,12 @@ const ChangeDateUseEvent = (props: any) => {
   const [ticketDateEvent, setTicketDateEvent] = useState(
     moment(itemTicketEvent.ticketDate.toDate()).format('DD/MM/YYYY')
   )
-  const handleSubmit = () => {
+  const handleSubmitUpdateEvent = () => {
     props.updateTicketDataEvent({
       id: itemTicketEvent.id,
       ticketDate: ticketDateEvent,
     })
-    props.onHide()
+    props.onHideDateUseEvent()
   }
 
   const handleOnChangeDateUse = (date: any) => {
@@ -84,10 +84,10 @@ const ChangeDateUseEvent = (props: any) => {
 
       <Row>
         <Col span={24} className='btn'>
-          <Button className='cancel' onClick={() => props.onHide()}>
+          <Button className='cancel' onClick={() => props.onHideDateUseEvent()}>
             Hủy
           </Button>
-          <Button className='submit' onClick={handleSubmit}>
+          <Button className='submit' onClick={handleSubmitUpdateEvent}>
             Lưu
           </Button>
         </Col>

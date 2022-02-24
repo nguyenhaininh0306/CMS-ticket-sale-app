@@ -44,7 +44,7 @@ const ComboEvent = ({ ticketEventData, fetchTicketsEvent }: any) => {
       {isOpenModal && isOpenModal === true ? (
         <ChangeDateUseEvent
           show={isOpenModal}
-          onHide={() => setIsOpenModal(false)}
+          onHideDateUseEvent={() => setIsOpenModal(false)}
           ticketDateDataEvent={ticketDateDataEvent}
         />
       ) : (
@@ -79,7 +79,7 @@ const ComboEvent = ({ ticketEventData, fetchTicketsEvent }: any) => {
           </div>
           <FilterModal
             show={modalShow}
-            onHide={() => setModalShow(false)}
+            onHideFilter={() => setModalShow(false)}
             statusValue={statusValue}
           />
           <div className='export'>Xuất file(.csv)</div>

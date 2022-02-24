@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { fetchTickets } from '../../store/actions/ticketFamilyActions'
 import FilterModal from '../modal/FilterModal'
-import { Popover, Tabs } from 'antd'
+import { Popover } from 'antd'
 import db from '../../firebase/config'
 import ChangeDateUse from '../modal/ChangeDateUse'
 import moment from 'moment'
@@ -44,7 +44,7 @@ const ComboFamily = ({ ticketData, fetchTickets }: any) => {
       {isOpenModal && isOpenModal === true ? (
         <ChangeDateUse
           show={isOpenModal}
-          onHide={() => setIsOpenModal(false)}
+          onHideDateUse={() => setIsOpenModal(false)}
           ticketDateData={ticketDateData}
         />
       ) : (
@@ -75,11 +75,16 @@ const ComboFamily = ({ ticketData, fetchTickets }: any) => {
           <div className='filter' onClick={() => setModalShow(true)}>
             <i className='fas fa-filter'></i>Lọc
           </div>
-          <FilterModal
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-            statusValue={statusValue}
-          />
+          {modalShow && modalShow === true ? (
+            <FilterModal
+              show={modalShow}
+              onHideFilter={() => setModalShow(false)}
+              statusValue={statusValue}
+            />
+          ) : (
+            ''
+          )}
+
           <div className='export'>Xuất file(.csv)</div>
         </div>
       </div>
