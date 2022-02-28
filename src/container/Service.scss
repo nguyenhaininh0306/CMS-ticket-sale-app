@@ -168,7 +168,10 @@ td.day-use {
   flex-direction: column;
 }
 
-.ant-pagination {
-  display: flex;
-  justify-content: center;
+.ant-pagination-item-active {
+  border-color: #ff993c !important;
+}
+
+.ant-pagination-item-active a {
+  color: #ff993c !important;
 }

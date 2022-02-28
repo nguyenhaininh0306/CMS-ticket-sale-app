@@ -108,7 +108,6 @@
           border-radius: 4px;
           width: 150px;
           height: 30px;
-          margin-left: 40px;
           margin-top: 8px;
           color: #919dba;
           i {
@@ -128,7 +127,6 @@
           border-radius: 4px;
           width: 150px;
           height: 30px;
-          margin-left: 40px;
           margin-top: 8px;
           color: #03ac00;
           i {
@@ -148,7 +146,6 @@
           border-radius: 4px;
           width: 150px;
           height: 30px;
-          margin-left: 40px;
           margin-top: 8px;
           color: #fd5959;
           i {
@@ -210,4 +207,8 @@ span.ant-popover-arrow-content {
 .ant-tabs-top > div > .ant-tabs-nav::before,
 .ant-tabs-bottom > div > .ant-tabs-nav::before {
   border-bottom: none !important;
+}
+
+.ant-table-thead > tr > th {
+  font-weight: 600 !important;
 }

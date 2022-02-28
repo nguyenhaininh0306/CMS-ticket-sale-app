@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import db from '../firebase/config'
 import { fetchTickets } from '../store/actions/ticketFamilyActions'
 import './CheckingTicket.scss'
-import { Radio, Space } from 'antd'
+import { Radio, Space, Table } from 'antd'
 import 'antd/dist/antd.css'
 import DayPicker from './calendar/DayPicker'
 import moment from 'moment'
@@ -74,7 +74,7 @@ const CheckingTicket = ({ ticketData, fetchTickets }: any) => {
             </div>
           </div>
           <div className='body-table'>
-            <table>
+            {/* <table>
               <tr>
                 <th>STT</th>
                 <th>Số vé</th>
@@ -109,7 +109,65 @@ const CheckingTicket = ({ ticketData, fetchTickets }: any) => {
                     )
                   })
                 : ''}
-            </table>
+            </table> */}
+            <Table
+              dataSource={data}
+              pagination={{ pageSize: 12, position: ['bottomCenter'] }}
+              rowKey='id'
+            >
+              <Table.Column
+                title='STT'
+                dataIndex='id'
+                key='id'
+                render={(text: any, record: any, index: any) => (
+                  <div>{index + 1}</div>
+                )}
+              />
+
+              <Table.Column
+                title='Số vé'
+                dataIndex='ticketId'
+                key='ticketId'
+                render={(text: any) => <div>{text}</div>}
+              />
+
+              <Table.Column
+                title='Ngày sử dụng'
+                dataIndex='ticketDate'
+                key='ticketDate'
+                render={(text: any) => (
+                  <div>{moment(text.toDate()).format('DD/MM/YYYY')}</div>
+                )}
+              />
+
+              <Table.Column
+                title='Tên loại'
+                dataIndex='type'
+                key='type'
+                render={(text: any) => <div>{text}</div>}
+              />
+
+              <Table.Column
+                title='Cổng Check-in'
+                dataIndex='checkin'
+                key='checkin'
+                render={(text: any) => <div>{text}</div>}
+              />
+
+              <Table.Column
+                dataIndex='control'
+                key='control'
+                render={(text: any) => (
+                  <div
+                    className={
+                      text && text === 'Chưa đối soát' ? 'grey' : 'red'
+                    }
+                  >
+                    {text}
+                  </div>
+                )}
+              />
+            </Table>
           </div>
         </div>
       </div>
